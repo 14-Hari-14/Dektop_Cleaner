@@ -7,4 +7,4 @@ This python scrits uses os and shutil module to manipulate files and directories
 ![Image of a cluttered directory](/beforess.png)
 
 ## After
-![Image of an uncluttered directory](/afterss.jpeg)
+![Image of an uncluttered directory](/afterss.png)
