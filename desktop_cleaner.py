@@ -1,6 +1,7 @@
 #program to create a script that will clean and organize files into folders
 import os
 import shutil
+import sys
 #logic for this code 
 '''
 if there is no directory then create one
@@ -9,6 +10,7 @@ put all the documents .pdf, .txt, .docx in the docs folder
 .mp4, .mov in the videos folder 
 and all miscelaneous stuff in the other folder
 '''
+
 
 #function to create a folder if it doesnt exist
 def create_folder_if_not_exists(folder):
@@ -43,12 +45,25 @@ def organize_files(area_path):
             create_folder_if_not_exists(destination_path)
             shutil.move(file_path, os.path.join(destination_path, file))
     print("Succesfully managed") #displaying the completion of the program
+    
+    
+        
 
 if __name__ == "__main__": #entry point of the program
+    default_area = "Downloads"
     area = str(input("Enter the directory you want to manage: ")) #checking which directory to manage
     area_list = ["Desktop", "Documents", "Music", "Pictures", "Videos", "Downloads"] #list of valid direcotry names edit this to add personal direcotry names
+    
+    if len(sys.argv) > 1:  # Check if arguments are provided when running the script
+        area = sys.argv[1]  # Use the first argument as the directory to manage
+    else:
+        area = default_area  # If no arguments are provided, use the default_area
+
     if area in area_list:
-        area_path = os.path.join(os.path.expanduser("~"), area) 
-        organize_files(area_path)#passing the desired irectory to the organize_files function
+        area_path = os.path.join(os.path.expanduser("~"), area)
+        organize_files(area_path)
     else:
         print("Incorrect directory mentioned") #stopping the program if incorrect file name is mentioned
+
+
+
