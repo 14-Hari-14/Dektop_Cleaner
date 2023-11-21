@@ -14,23 +14,23 @@ and all miscelaneous stuff in the other folder
 def create_folder_if_not_exists(folder):
     if not os.path.exists(folder):
         os.makedirs(folder)
-
+#function to organize the files in specific folders
 def organize_files(area_path):
     files = os.listdir(area_path)
-
-    folders = {
+    #dictionary to check various file extentions and organise them respectively
+    folders = { 
         "Images": [".jpg", ".jpeg", ".png", ".gif"],
         "Documents": [".pdf", ".docx", ".txt"],
         "Videos": [".mp4", ".avi", ".mov"],
         "Others": []  # Default folder for other file types
     }
-
+    #checkin for file in the list of all files copied from the directory
     for file in files:
-        file_path = os.path.join(area_path, file)
+        file_path = os.path.join(area_path, file) #creating an absolute file path of the file
         if os.path.isfile(file_path):
-            file_extension = os.path.splitext(file)[1].lower()
+            file_extension = os.path.splitext(file)[1].lower() #checking the extension of each file
 
-            destination_folder = None
+            destination_folder = None #storing files according to the extensions
             for folder_name, extensions in folders.items():
                 if file_extension in extensions:
                     destination_folder = folder_name
@@ -39,16 +39,16 @@ def organize_files(area_path):
             if destination_folder is None:
                 destination_folder = "Others"
 
-            destination_path = os.path.join(area_path, destination_folder)
+            destination_path = os.path.join(area_path, destination_folder) #adding files to those newly or previously created folders
             create_folder_if_not_exists(destination_path)
             shutil.move(file_path, os.path.join(destination_path, file))
-    print("Succesfully managed")
+    print("Succesfully managed") #displaying the completion of the program
 
-if __name__ == "__main__":
-    area = str(input("Enter the directory you want to manage: "))
-    area_list = ["Desktop", "Documents", "Music", "Pictures", "Videos", "Downloads"]
+if __name__ == "__main__": #entry point of the program
+    area = str(input("Enter the directory you want to manage: ")) #checking which directory to manage
+    area_list = ["Desktop", "Documents", "Music", "Pictures", "Videos", "Downloads"] #list of valid direcotry names edit this to add personal direcotry names
     if area in area_list:
         area_path = os.path.join(os.path.expanduser("~"), area)
         organize_files(area_path)
     else:
-        print("Incorrect directory mentioned")
+        print("Incorrect directory mentioned") #stopping the program if incorrect file name is mentioned
