@@ -48,7 +48,7 @@ if __name__ == "__main__": #entry point of the program
     area = str(input("Enter the directory you want to manage: ")) #checking which directory to manage
     area_list = ["Desktop", "Documents", "Music", "Pictures", "Videos", "Downloads"] #list of valid direcotry names edit this to add personal direcotry names
     if area in area_list:
-        area_path = os.path.join(os.path.expanduser("~"), area)
-        organize_files(area_path)
+        area_path = os.path.join(os.path.expanduser("~"), area) 
+        organize_files(area_path)#passing the desired irectory to the organize_files function
     else:
         print("Incorrect directory mentioned") #stopping the program if incorrect file name is mentioned
